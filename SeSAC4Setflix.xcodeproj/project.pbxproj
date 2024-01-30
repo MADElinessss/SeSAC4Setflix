@@ -30,6 +30,7 @@
 		C1C6E2782B689423005ADF3B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6E2772B689423005ADF3B /* APIKey.swift */; };
 		C1C6E27A2B6895AB005ADF3B /* TrendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6E2792B6895AB005ADF3B /* TrendingModel.swift */; };
 		C1C6E27E2B68B78C005ADF3B /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6E27D2B68B78C005ADF3B /* SearchTableViewCell.swift */; };
+		C1C6E2802B68CD81005ADF3B /* PosterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6E27F2B68CD81005ADF3B /* PosterModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		C1C6E2772B689423005ADF3B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		C1C6E2792B6895AB005ADF3B /* TrendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingModel.swift; sourceTree = "<group>"; };
 		C1C6E27D2B68B78C005ADF3B /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		C1C6E27F2B68CD81005ADF3B /* PosterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				C1C6E2732B6892AB005ADF3B /* TMDBAPIManager.swift */,
 				C1C6E2772B689423005ADF3B /* APIKey.swift */,
 				C1C6E2792B6895AB005ADF3B /* TrendingModel.swift */,
+				C1C6E27F2B68CD81005ADF3B /* PosterModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				C1C6E2402B6723D8005ADF3B /* AppDelegate.swift in Sources */,
 				C1C6E2622B673BA4005ADF3B /* BlackRadiusTextField.swift in Sources */,
 				C1C6E2422B6723D8005ADF3B /* SceneDelegate.swift in Sources */,
+				C1C6E2802B68CD81005ADF3B /* PosterModel.swift in Sources */,
 				C1C6E2782B689423005ADF3B /* APIKey.swift in Sources */,
 				C1C6E2562B672944005ADF3B /* SquareBoxView.swift in Sources */,
 				C1C6E27E2B68B78C005ADF3B /* SearchTableViewCell.swift in Sources */,

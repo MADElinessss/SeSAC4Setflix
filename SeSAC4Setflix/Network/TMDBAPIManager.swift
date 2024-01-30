@@ -30,8 +30,21 @@ class TMDBAPIManager {
     }
     
     // 인스턴스 메서드
-    func fetchMovieImages() {
+    func fetchMovieImages(_ id: Int, completionHandler: @escaping (PosterModel) -> Void) {
+//    https://api.themoviedb.org/3/movie/{movie_id}/images
+        let url = "https://api.themoviedb.org/3/movie/\(id)/images"
         
+        let header: HTTPHeaders = ["Authorization": APIKey.tmdbAPI]
+        
+        AF.request(url, method: .get, headers: header).responseDecodable(of: PosterModel.self) { response in
+            switch response.result {
+            case .success(let success):
+//                print(success)
+                completionHandler(success)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
         
         
     }

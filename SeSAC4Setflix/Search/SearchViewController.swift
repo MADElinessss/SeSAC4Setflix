@@ -21,6 +21,23 @@ class SearchViewController: UIViewController {
     var list : [Movie] = [] // <- ☀️ 상단 컬렉션뷰에서 사용할 리스트
     
     var titleList: [String] = ["포스터", "웡카", "위시", "아쿠아맨"] // <- 하단 테이블뷰 셀의 컬렉션뷰에서 사용할 리스트
+    
+    // 313369, 11036, 122906, 11324, 19995
+    // 1. imageList -> TableView -> CollectionView
+    // 2. 네트워크 요청 -> 응답 받아 -> imageList에 담아 -> reload
+//    var imageList: [[String]] = [
+//        ["humidity", "rainbow", "wind", "snowflake"],
+//        ["mic.fill", "sun.max", "sunset", "cloud.rain"],
+//        ["gamecontroller"],
+//        ["figure.walk", "moon.fill"]
+//    ]
+    
+    var imageList: [PosterModel] = [
+        PosterModel(posters: []),
+        PosterModel(posters: []),
+        PosterModel(posters: []),
+        PosterModel(posters: [])
+    ]
 
     // configureCollectionViewLayout가 만들어져야 -> collectionView 속성을 잡음
     // 시점 조절해야 함
@@ -44,6 +61,26 @@ class SearchViewController: UIViewController {
             self.list = movie
             self.collectionView.reloadData()
             // MARK: 테이블뷰 다 나오게 다시 그리기
+//            self.tableView.reloadData()
+        }
+        
+        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+            self.imageList[0] = poster
+            self.tableView.reloadData()
+        }
+        
+        TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
+            self.imageList[1] = poster
+            self.tableView.reloadData()
+        }
+        
+        TMDBAPIManager.shared.fetchMovieImages(122906) { poster in
+            self.imageList[2] = poster
+            self.tableView.reloadData()
+        }
+        
+        TMDBAPIManager.shared.fetchMovieImages(19995) { poster in
+            self.imageList[3] = poster
             self.tableView.reloadData()
         }
     }
@@ -104,15 +141,29 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+        
+        // self.collectionView: 가까운 놈
+        if self.collectionView == collectionView {
+            return list.count
+        } else {
+            return imageList[collectionView.tag].posters.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as! SearchCollectionViewCell
         
-        let url = URL(string: "https://image.tmdb.org/t/p/w300/\(list[indexPath.item].posterPath)")
-        cell.posterImageView.kf.setImage(with: url)
-        cell.titleLabel.text = list[indexPath.item].title
+        if self.collectionView == collectionView {
+            let url = URL(string: "https://image.tmdb.org/t/p/w300/\(list[indexPath.item].posterPath)")
+            cell.posterImageView.kf.setImage(with: url)
+            cell.titleLabel.text = list[indexPath.item].title
+        } else {
+            let item = imageList[collectionView.tag].posters[indexPath.item]
+            let url = URL(string: "https://image.tmdb.org/t/p/w300/\(item.file_path)")
+            cell.posterImageView.kf.setImage(with: url)
+//            cell.titleLabel.text = list[indexPath.item].title)
+//            cell.titleLabel.text = "🙈🙈🙈🙈"
+        }
         
         return cell
     }
@@ -132,6 +183,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.collectionView.dataSource = self
         cell.collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: "SearchCollectionViewCell")
         
+        cell.collectionView.tag = indexPath.row
         cell.titleLabel.text = titleList[indexPath.row]
         
         // MARK: 테이블뷰 다 나오게 다시 그리기
