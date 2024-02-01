@@ -14,7 +14,6 @@ class BaseViewController: UIViewController {
 
         print(self, #function)
         
-        
         // 이 뷰컨을 상속받는 모든 뷰에 해당될 속성들
         view.backgroundColor = .white
         
