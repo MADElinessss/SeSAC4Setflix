@@ -48,7 +48,18 @@ class SearchViewController: UIViewController {
         collectionViewLayout: configureCollectionViewLayout()
     )
     
-    let tableView = UITableView()
+//    let tableView = UITableView()
+    
+    // MARK: 클로저
+    lazy var tableView: UITableView = {
+        let view = UITableView()
+        view.delegate = self
+        view.dataSource = self
+        view.rowHeight = 200
+        view.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+        
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,32 +68,132 @@ class SearchViewController: UIViewController {
         configureLayout()
         configuewView()
         
-        TMDBAPIManager.shared.fetchTrendingMovie { movie in
-            self.list = movie
-            self.collectionView.reloadData()
-            // MARK: 테이블뷰 다 나오게 다시 그리기
+//        TMDBAPIManager.shared.fetchTrendingMovie { movie in
+//            self.list = movie
+//            self.collectionView.reloadData()
+//            // MARK: 테이블뷰 다 나오게 다시 그리기
+////            self.tableView.reloadData()
+//        }
+        
+        // 👩🏻‍🔧 리팩토링: 네트워크 통신 다 받고, 갱신을 한번만 할 수 있도록!
+//        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+//            self.imageList[0] = poster
 //            self.tableView.reloadData()
+//        }
+//        
+//        TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
+//            self.imageList[1] = poster
+//            self.tableView.reloadData()
+//        }
+//        
+//        TMDBAPIManager.shared.fetchMovieImages(122906) { poster in
+//            self.imageList[2] = poster
+//            self.tableView.reloadData()
+//        }
+//        
+//        TMDBAPIManager.shared.fetchMovieImages(19995) { poster in
+//            self.imageList[3] = poster
+//            self.tableView.reloadData()
+//        }
+        // 갱신은 한번으로 줄었지만, 속도가 더 느림
+        // 콜백 지우기!
+//        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+//            self.imageList[0] = poster
+//            TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
+//                self.imageList[1] = poster
+//                TMDBAPIManager.shared.fetchMovieImages(122906) { poster in
+//                    self.imageList[2] = poster
+//                    TMDBAPIManager.shared.fetchMovieImages(19995) { poster in
+//                        self.imageList[3] = poster
+//                        self.tableView.reloadData()
+//                    }
+//                }
+//            }
+//        }
+        let group = DispatchGroup()
+        
+//        DispatchQueue.global().async(group: group) { // <- 비동기 알바생이
+//            TMDBAPIManager.shared.fetchTrendingMovie { movie in // alamofire <- 동기 알바생한테
+//                self.list = movie
+//            }
+//        }
+        
+        
+        group.enter() // 0 -> 1: Reference count가 1 증가!
+        TMDBAPIManager.shared.fetchTrendingMovie { movie in // alamofire <- 동기 알바생한테
+            self.list = movie
+            group.leave() // 1 -> 0: Reference count가 1 감소!
         }
         
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+//                self.imageList[0] = poster
+//            }
+//        }
+        
+        group.enter()
         TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
             self.imageList[0] = poster
-            self.tableView.reloadData()
+            group.leave()
         }
         
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
+//                self.imageList[1] = poster
+//            }
+//        }
+        group.enter()
         TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
             self.imageList[1] = poster
-            self.tableView.reloadData()
+            group.leave()
         }
         
+        
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPIManager.shared.fetchMovieImages(122906) { poster in
+//                self.imageList[2] = poster
+//            }
+//        }
+        group.enter()
         TMDBAPIManager.shared.fetchMovieImages(122906) { poster in
             self.imageList[2] = poster
-            self.tableView.reloadData()
+            group.leave()
         }
         
+        
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+//                self.imageList[0] = poster
+//            }
+//        }
+        group.enter()
+        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+            self.imageList[0] = poster
+            group.leave()
+        }
+        
+        
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPIManager.shared.fetchMovieImages(19995) { poster in
+//                self.imageList[3] = poster
+//            }
+//        }
+        group.enter()
         TMDBAPIManager.shared.fetchMovieImages(19995) { poster in
             self.imageList[3] = poster
-            self.tableView.reloadData()
+            group.leave()
         }
+        
+        // 일이 다 끝나면
+        group.notify(queue: .main) {
+            print("끝")
+            self.tableView.reloadData()
+            self.collectionView.reloadData()
+        }
+        
+        // notify: 동기 함수 -> 네트워크 통신과 같은 비동기 함수가 group에 묶이게 되면,
+        // 비동기함수는 또 다른 알바생이 담당하게 되기 때문에, 또 다른 알바생의 일을 기다리지 않고, notify를 바로 띄우게 한다!!!!
+        // enter, leave
     }
     
     func configureHierarchy() {
@@ -116,10 +227,10 @@ class SearchViewController: UIViewController {
         // -> 그래서 spacing 없을때 적합함
         
         // MARK: - TableView
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 200
-        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.rowHeight = 200
+//        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
     }
     
     // 인스턴스 메서드

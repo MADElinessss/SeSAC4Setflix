@@ -10,7 +10,12 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    let emailTextField = BlackRadiusTextField()
+    let emailTextField : BlackRadiusTextField = {
+       let view = BlackRadiusTextField()
+        view.placeholder = "이메일을 입력해주세요."
+        return view
+    }()
+    
     let passwordTextField = BlackRadiusTextField()
     let titleLabel = BlackTextLabel()
     let logoImageView = PosterImageView(frame: .zero)
@@ -34,7 +39,7 @@ class HomeViewController: UIViewController {
     }
     
     func configureView() {
-        emailTextField.placeholder = "이메일을 입력해주세요."
+//        emailTextField.placeholder = "이메일을 입력해주세요."
         passwordTextField.placeholder = "비밀번호를 입력해주세요."
         titleLabel.text = "로그인"
         logoImageView.image = UIImage(systemName: "person")
