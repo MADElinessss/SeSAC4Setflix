@@ -12,9 +12,26 @@ class TMDBAPIManager {
     
     static let shared = TMDBAPIManager()
 
-    func fetchMovie(api: TMDBAPI, completionHandler: @escaping (([Movie]) -> Void)) {
+    func request<T: Decodable>(type: T.Type, api: TMDBAPI, completionHandler: @escaping ((T) -> Void)) {
         
         AF.request(api.endpoint, 
+                   method: api.method,
+                   parameters: api.parameter,
+                   encoding: URLEncoding(destination: .queryString),
+                   headers: api.header)
+        .responseDecodable(of: T.self) { response in// T.self 자리에 type 써도됨
+            switch response.result {
+            case .success(let success):
+                completionHandler(success)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
+    func fetchMovie(api: TMDBAPI, completionHandler: @escaping (([Movie]) -> Void)) {
+        
+        AF.request(api.endpoint,
                    method: api.method,
                    parameters: api.parameter,
                    encoding: URLEncoding(destination: .queryString),

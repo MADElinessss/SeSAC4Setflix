@@ -65,4 +65,58 @@ extension UIViewController {
     }
 }
 
+enum TransitionStyle {
+    case present
+    case presentNavigation // 네비게이션 임베드 present
+    case presentFullNavigation // 네비게이션 임베드 full present
+    case push
+}
 
+
+
+extension UIViewController {
+//    func transition<T: UIViewController>(style: TransitionStyle, storyboard: String, viewController: String) {
+    func transition<T: UIViewController>(style: TransitionStyle, storyboard: String, viewController: T.Type) {
+        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
+//        let vc = storyboard.instantiateViewController(identifier: String(describing: viewController)) as! T
+        // 왜 T? 이 자리에는 인스턴스가 아니라 클래스 자체가 들어옴
+        // 원래 저 자리에 MainViewController()가 아니라, MainViewController <- 클래스 자체가 들어오니까
+        
+        // 제네릭은 타입을 유연하게 대응하기 위함이야.
+        
+        //  T.Type <- 메타타입!
+        
+        /*
+         메타타입? 가보자
+         제네릭은 2개가 있어.
+         Array <- 공식문서나 definition보면 Generic 타입이야.
+         Array도 숫자가 들어올지, 문자가 들어올지 몰라. 타입 명세하긴 하는데, 걍 Element임
+         그래서 원래는 array를
+         let array : [String] = ["1", "2"]
+         let array: Array<String> = ["1", "2"] 요렇게 써야돼
+         
+         */
+//        let vc = storyboard.instantiateViewController(identifier: String(describing: viewController)) as! SearchViewController
+        
+        let a: SearchViewController = SearchViewController()
+        let b: SearchViewController.Type = SearchViewController.self
+        let vc = storyboard.instantiateViewController(identifier: String(describing: viewController)) as! T
+        // as! b <- 얘도 문법적으로는 맞는데 실제로 사용될때엔 T, T.self가 다르게 쓰임
+        
+        
+        // 화면 전환하는 방법
+        switch style {
+        case .present:
+            present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        case .presentFullNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
