@@ -37,6 +37,7 @@
 		C1F876312B6B251100A8AA6E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876302B6B251100A8AA6E /* HomeView.swift */; };
 		C1F876332B6B31E000A8AA6E /* FindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876322B6B31E000A8AA6E /* FindView.swift */; };
 		C1F876352B6B365200A8AA6E /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876342B6B365200A8AA6E /* BaseView.swift */; };
+		C1F876372B6B5F0C00A8AA6E /* TMDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876362B6B5F0C00A8AA6E /* TMDBAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		C1F876302B6B251100A8AA6E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C1F876322B6B31E000A8AA6E /* FindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindView.swift; sourceTree = "<group>"; };
 		C1F876342B6B365200A8AA6E /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		C1F876362B6B5F0C00A8AA6E /* TMDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				C1C6E2792B6895AB005ADF3B /* TrendingModel.swift */,
 				C1C6E27F2B68CD81005ADF3B /* PosterModel.swift */,
 				C1F876162B69CE2000A8AA6E /* GCDViewController.swift */,
+				C1F876362B6B5F0C00A8AA6E /* TMDBAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				C1F876352B6B365200A8AA6E /* BaseView.swift in Sources */,
 				C1C6E2662B6743A1005ADF3B /* PosterImageView.swift in Sources */,
 				C1F876212B69F4D000A8AA6E /* DetailViewController.swift in Sources */,
+				C1F876372B6B5F0C00A8AA6E /* TMDBAPI.swift in Sources */,
 				C1C6E2402B6723D8005ADF3B /* AppDelegate.swift in Sources */,
 				C1C6E2622B673BA4005ADF3B /* BlackRadiusTextField.swift in Sources */,
 				C1F876312B6B251100A8AA6E /* HomeView.swift in Sources */,

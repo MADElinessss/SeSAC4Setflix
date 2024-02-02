@@ -120,10 +120,16 @@ class SearchViewController: UIViewController {
         
         
         group.enter() // 0 -> 1: Reference count가 1 증가!
-        TMDBAPIManager.shared.fetchTrendingMovie { movie in // alamofire <- 동기 알바생한테
+        
+        TMDBAPIManager.shared.fetchMovie(api: .trending) { movie in
             self.list = movie
             group.leave() // 1 -> 0: Reference count가 1 감소!
         }
+        
+//        TMDBAPIManager.shared.fetchTrendingMovie { movie in // alamofire <- 동기 알바생한테
+//            self.list = movie
+//            group.leave() // 1 -> 0: Reference count가 1 감소!
+//        }
         
 //        DispatchQueue.global().async(group: group) {
 //            TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
@@ -132,10 +138,16 @@ class SearchViewController: UIViewController {
 //        }
         
         group.enter()
-        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+        
+        TMDBAPIManager.shared.fetchMovieImages(api: .photo(id: "313369")) { poster in
             self.imageList[0] = poster
             group.leave()
         }
+        
+//        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+//            self.imageList[0] = poster
+//            group.leave()
+//        }
         
 //        DispatchQueue.global().async(group: group) {
 //            TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
@@ -143,10 +155,15 @@ class SearchViewController: UIViewController {
 //            }
 //        }
         group.enter()
-        TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
+        TMDBAPIManager.shared.fetchMovieImages(api: .photo(id: "11036")) { poster in
             self.imageList[1] = poster
             group.leave()
         }
+        
+//        TMDBAPIManager.shared.fetchMovieImages(11036) { poster in
+//            self.imageList[1] = poster
+//            group.leave()
+//        }
         
         
 //        DispatchQueue.global().async(group: group) {
@@ -155,10 +172,14 @@ class SearchViewController: UIViewController {
 //            }
 //        }
         group.enter()
-        TMDBAPIManager.shared.fetchMovieImages(122906) { poster in
+        TMDBAPIManager.shared.fetchMovieImages(api: .photo(id: "122906")) { poster in
             self.imageList[2] = poster
             group.leave()
         }
+//        TMDBAPIManager.shared.fetchMovieImages(122906) { poster in
+//            self.imageList[2] = poster
+//            group.leave()
+//        }
         
         
 //        DispatchQueue.global().async(group: group) {
@@ -167,10 +188,14 @@ class SearchViewController: UIViewController {
 //            }
 //        }
         group.enter()
-        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
-            self.imageList[0] = poster
+        TMDBAPIManager.shared.fetchMovieImages(api: .photo(id: "313369")) { poster in
+            self.imageList[3] = poster
             group.leave()
         }
+//        TMDBAPIManager.shared.fetchMovieImages(313369) { poster in
+//            self.imageList[0] = poster
+//            group.leave()
+//        }
         
         
 //        DispatchQueue.global().async(group: group) {
@@ -178,11 +203,11 @@ class SearchViewController: UIViewController {
 //                self.imageList[3] = poster
 //            }
 //        }
-        group.enter()
-        TMDBAPIManager.shared.fetchMovieImages(19995) { poster in
-            self.imageList[3] = poster
-            group.leave()
-        }
+//        group.enter()
+//        TMDBAPIManager.shared.fetchMovieImages(19995) { poster in
+//            self.imageList[3] = poster
+//            group.leave()
+//        }
         
         // 일이 다 끝나면
         group.notify(queue: .main) {
