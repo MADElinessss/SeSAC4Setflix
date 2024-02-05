@@ -39,6 +39,7 @@
 		C1F876352B6B365200A8AA6E /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876342B6B365200A8AA6E /* BaseView.swift */; };
 		C1F876372B6B5F0C00A8AA6E /* TMDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876362B6B5F0C00A8AA6E /* TMDBAPI.swift */; };
 		C1F876422B6C6B6D00A8AA6E /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876412B6C6B6D00A8AA6E /* UIView+Extension.swift */; };
+		C1F876452B6C90E000A8AA6E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F876442B6C90E000A8AA6E /* WalkThroughViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		C1F876342B6B365200A8AA6E /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		C1F876362B6B5F0C00A8AA6E /* TMDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPI.swift; sourceTree = "<group>"; };
 		C1F876412B6C6B6D00A8AA6E /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C1F876442B6C90E000A8AA6E /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		C1C6E23E2B6723D8005ADF3B /* SeSAC4Setflix */ = {
 			isa = PBXGroup;
 			children = (
+				C1F876432B6C90B900A8AA6E /* Intro */,
 				C1F876402B6C6B3C00A8AA6E /* Extension */,
 				C1F8761F2B69F4C800A8AA6E /* Detail */,
 				C1F8761C2B69F39000A8AA6E /* Base */,
@@ -206,6 +209,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		C1F876432B6C90B900A8AA6E /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				C1F876442B6C90E000A8AA6E /* WalkThroughViewController.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,6 +310,7 @@
 				C1C6E2742B6892AB005ADF3B /* TMDBAPIManager.swift in Sources */,
 				C1C6E26B2B687F93005ADF3B /* SearchCollectionViewCell.swift in Sources */,
 				C1F876352B6B365200A8AA6E /* BaseView.swift in Sources */,
+				C1F876452B6C90E000A8AA6E /* WalkThroughViewController.swift in Sources */,
 				C1C6E2662B6743A1005ADF3B /* PosterImageView.swift in Sources */,
 				C1F876212B69F4D000A8AA6E /* DetailViewController.swift in Sources */,
 				C1F876372B6B5F0C00A8AA6E /* TMDBAPI.swift in Sources */,

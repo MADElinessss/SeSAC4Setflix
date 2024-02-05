@@ -16,7 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ViewController()
+        // MARK: 온보딩 동그라미 3개
+        window?.rootViewController = WalkThroughViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        // MARK: 온보딩 책 넘기기
+//        window?.rootViewController = WalkThroughViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal)
         window?.makeKeyAndVisible()
     }
 
