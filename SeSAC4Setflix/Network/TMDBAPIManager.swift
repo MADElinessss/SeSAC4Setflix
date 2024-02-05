@@ -29,7 +29,7 @@ class TMDBAPIManager {
         }
     }
     
-    func fetchMovie(api: TMDBAPI, completionHandler: @escaping (([Movie]) -> Void)) {
+    func fetchMovie(api: TMDBAPI, completionHandler: @escaping (([Movie]?, AFError?) -> Void)) {
         
         AF.request(api.endpoint,
                    method: api.method,
@@ -39,11 +39,12 @@ class TMDBAPIManager {
         .responseDecodable(of: TrendingModel.self) { response in
             switch response.result {
             case .success(let success):
-                completionHandler(success.results)
+                completionHandler(success.results, nil)
             case .failure(let failure):
-                print(failure)
+                completionHandler(nil, failure)
             }
         }
+        
     }
     
     func fetchMovieImages(api: TMDBAPI, completionHandler: @escaping (PosterModel) -> Void) {

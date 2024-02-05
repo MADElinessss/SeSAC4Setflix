@@ -25,20 +25,41 @@ class FindViewController: UIViewController {
         mainView.searchBar.delegate = self
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
+        
+//        TMDBSessionManager.shared.fetchTrendingMovie()
+        print("1111111111", Thread.isMainThread)
+        TMDBSessionManager.shared.fetchTrendingMovie { movie, error in
+            print("2222222222", Thread.isMainThread)
+            if error == nil {
+                // 네트워크 통신 성공
+                guard let movie = movie else { return }
+                
+                self.list = movie.results
+                print("555555555", Thread.isMainThread)
+                self.mainView.collectionView.reloadData()
+                
+            } else {
+                // error 분기처리
+                // alert
+                
+            }
+        }
     }
 }
 
 extension FindViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        TMDBAPIManager.shared.fetchMovie(api: .search(query: searchBar.text ?? "")) { movie in
-            self.list = movie
-            self.mainView.collectionView.reloadData()
-        }
+//        TMDBAPIManager.shared.fetchMovie(api: .search(query: searchBar.text ?? "")) { movie in
+//            self.list = movie
+//            self.mainView.collectionView.reloadData()
+//        }
         
 //        TMDBAPIManager.shared.searchMovie(query: searchBar.text!) { movie in
 //            self.list = movie
 //            self.mainView.collectionView.reloadData()
 //        }
+        
+        
     }
 }
 

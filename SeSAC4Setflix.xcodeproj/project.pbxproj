@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C11840F42B7069C60033E28A /* TMDBSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11840F32B7069C60033E28A /* TMDBSessionManager.swift */; };
 		C1C6E2402B6723D8005ADF3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6E23F2B6723D8005ADF3B /* AppDelegate.swift */; };
 		C1C6E2422B6723D8005ADF3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6E2412B6723D8005ADF3B /* SceneDelegate.swift */; };
 		C1C6E2442B6723D8005ADF3B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6E2432B6723D8005ADF3B /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C11840F32B7069C60033E28A /* TMDBSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBSessionManager.swift; sourceTree = "<group>"; };
 		C1C6E23C2B6723D8005ADF3B /* SeSAC4Setflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC4Setflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C6E23F2B6723D8005ADF3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1C6E2412B6723D8005ADF3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				C1C6E27F2B68CD81005ADF3B /* PosterModel.swift */,
 				C1F876162B69CE2000A8AA6E /* GCDViewController.swift */,
 				C1F876362B6B5F0C00A8AA6E /* TMDBAPI.swift */,
+				C11840F32B7069C60033E28A /* TMDBSessionManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				C1C6E2562B672944005ADF3B /* SquareBoxView.swift in Sources */,
 				C1C6E27E2B68B78C005ADF3B /* SearchTableViewCell.swift in Sources */,
 				C1F876172B69CE2000A8AA6E /* GCDViewController.swift in Sources */,
+				C11840F42B7069C60033E28A /* TMDBSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
