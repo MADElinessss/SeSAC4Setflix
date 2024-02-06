@@ -335,6 +335,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as! SearchCollectionViewCell
         
+        
+        
         if self.collectionView == collectionView {
             let url = URL(string: "https://image.tmdb.org/t/p/w300/\(list[indexPath.item].posterPath)")
             cell.posterImageView.kf.setImage(with: url)
@@ -360,6 +362,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+        
+        // MARK: 💡 강제언래핑 없애기
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell
+//        else { return UITableViewCell }
         
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self

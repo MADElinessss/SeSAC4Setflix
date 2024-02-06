@@ -19,21 +19,22 @@ class TMDBSessionManager {
     
     private init() { }
     
-    /*
-     MARK: URLSession
-     1. URLSessionConfiguration
-     - shared, default, ephemeral, ...
-     2. URLSessionTask
-     - datatask(대부분), download, upload, stream, ...
-     3. URLResponse
-     - completionHandler, delegate(진행률)
-     */
-    
+//    /
+//     MARK: URLSession
+//     1. URLSessionConfiguration
+//     - shared, default, ephemeral, ...
+//     2. URLSessionTask
+//     - datatask(대부분), download, upload, stream, ...
+//     3. URLResponse
+//     - completionHandler, delegate(진행률)
+//     */
+//    
     func fetchTrendingMovie(completionHandler: @escaping (TrendingModel?, TMDBError?) -> Void) {
 
         var url = URLRequest(url: TMDBAPI.trending.endpoint)
         url.addValue(APIKey.tmdbAPI, forHTTPHeaderField: "Authorization")
         print("33333333", Thread.isMainThread)
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             
             DispatchQueue.main.async {
@@ -50,7 +51,7 @@ class TMDBSessionManager {
                     return
                 }
                 // 네트워크 통신 성공
-                guard let data = data else {// 실데이터, 에러코드
+                guard let data = data else {// 실데이터, 에러코
                     // 근데 데이터가 없음
                     completionHandler(nil, .noData)
                     return
